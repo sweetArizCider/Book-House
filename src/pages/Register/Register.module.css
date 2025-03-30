@@ -103,15 +103,3 @@ span {
 span:hover {
   text-decoration: underline;
 }
-.buttonContinuar{
-  background-color: var(--color-primary);
-  color: var(--color-font-secondary);
-  font-family: var(--font-primary);
-  width: 100%;
-  font-weight: 600;
-  font-size: 1.2em;
-  padding: 0.5em 1.5em;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
