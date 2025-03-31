@@ -103,3 +103,9 @@ span {
 span:hover {
   text-decoration: underline;
 }
+.error{
+  color: red;
+  font-size: .9em;
+  text-align: center;
+  
+}

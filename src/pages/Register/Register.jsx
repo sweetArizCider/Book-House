@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import useRegister from '../../hooks/register/register'; // Asegúrate de poner la ruta correcta
 import styles from './Register.module.css'; 
 import Fondo from '../../assets/img/fondo.png';
 import Logo from '../../assets/img/logo.png';
-
+import Loader from '../../Components/Loader/Loader';
 function Register() {
+  const { registerUser, loading, error } = useRegister();
   const [formData, setFormData] = useState({
     nombre: '',
     apellidoPaterno: '',
@@ -18,13 +20,29 @@ function Register() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Mapear los nombres del formulario al formato del backend
+    const cleanedData = {
+      ...formData,
+      nombre: formData.nombre.trim(),
+      apellidoPaterno: formData.apellidoPaterno.trim(),
+      apellidoMaterno: formData.apellidoMaterno.trim(),
+      email: formData.email.trim().toLowerCase()
+    };
+  
+    try {
+      await registerUser(cleanedData);
+      // Redirigir a login
+    } catch (err) {
+      console.error('Detalle completo del error:', err);
+    }
   };
 
   return (
     <div className={styles['register-container']}>
+      {loading && <Loader />}
       <div className={styles.fondo}>
         <img src={Fondo} alt="Fondo de pantalla" />
       </div>
@@ -36,6 +54,8 @@ function Register() {
         <form onSubmit={handleSubmit} className={styles.registro}>
           <h1>¡Empieza ahora!</h1>
           <h3>¿Ya tienes una cuenta? <span>Iniciar sesión</span></h3>
+
+          
 
           <div className={styles['input-field']}>
             <label htmlFor="nombre">Nombre</label>
@@ -108,8 +128,15 @@ function Register() {
               placeholder="Contraseña"
             />
           </div>
+          {error && <div className={styles.error}>{error}</div>}
 
-          <button className="buttonContinuar" type="submit">Registrarse</button>
+          <button 
+            className="buttonContinuar"
+            type="submit"
+            disabled={loading}
+          >
+            Registrarse
+          </button>
         </form>
       </div>
     </div>
