@@ -3,7 +3,7 @@ import styles from './NavBar.module.css';
 import leftSVG from '../assets/svg/left.svg';
 import deepseekSVG from '../assets/svg/deepseek.svg';
 
-export function NavBar({ hubIcons = [], showBuscador = true, returnToHome = false, handleSearch, generateButton = false }) {
+export function NavBar({ hubIcons = [], showBuscador = true, returnToHome = false, handleSearch, generateButton = false, handleGenerate}) {
   
   return (
     <nav className={styles.navBar}>
@@ -30,6 +30,7 @@ export function NavBar({ hubIcons = [], showBuscador = true, returnToHome = fals
       <section className={styles.generateButtonSection} style={{ display: generateButton ? 'flex' : 'none'}}>
         <button 
           className={styles.generateButton}
+          onClick={handleGenerate}
         >
           Generar con IA
           <figure><img src={deepseekSVG} /></figure>
