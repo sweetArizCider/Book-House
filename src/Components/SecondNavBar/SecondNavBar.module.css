@@ -69,6 +69,11 @@
     width: 36px;
     height: 36px;
     overflow: hidden;
+    transition-duration: 400ms;
+}
+
+.iconsSection figure:hover{
+    transform: scale(1.2);
 }
 
 .iconsSection figure img{

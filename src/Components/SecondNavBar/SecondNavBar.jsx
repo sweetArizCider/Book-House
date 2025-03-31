@@ -32,10 +32,10 @@ export function SecondNavBar({ onAutorSelect}) {
             </section>
             <section className={styles.iconsSection}>
                 <figure>
-                    <img src={addSVG}/>
+                    <a href="/crear/libro"><img src={addSVG}/></a>
                 </figure>
                 <figure>
-                    <img src={trashSVG}/>
+                    <a href="/libro"><img src={trashSVG}/></a>
                 </figure>
             </section>
         </nav>
