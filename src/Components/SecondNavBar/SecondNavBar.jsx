@@ -4,7 +4,7 @@ import addSVG from '../../assets/svg/add.svg';
 import trashSVG from '../../assets/svg/trash.svg';
 import { useAutores } from '../../hooks/autores/useAutores';
 import { useState } from 'react';
-import { Modal } from '../Modal/AutorModal';
+import { Modal } from '../Modal/Modal';
 
 export function SecondNavBar({ onAutorSelect}) {
     const { autores, error } = useAutores();
@@ -24,7 +24,7 @@ export function SecondNavBar({ onAutorSelect}) {
     <>
         <nav className={styles.navBar}>
             <section className={styles.autorSection}>
-                <button onClick={toggleModal}>
+                <button onClick={toggleModal} className={styles.filtrar}>
                     Filtrar por autor <img src={downSVG} className={styles.down}/>
                 </button>
             </section>
@@ -44,6 +44,13 @@ export function SecondNavBar({ onAutorSelect}) {
             isOpen={isModalOpen} 
             onClose={toggleModal}
         >
+            <button 
+                className={`${styles.autorButton} ${styles.todos}`}
+                onClick={() => handleAutorClick()}
+            >
+                Todos los Autores
+                <figure className={styles.figure}><img src={downSVG}/></figure>
+            </button>
             {autores.map((autor) => (
                 <button
                     className={styles.autorButton}
@@ -51,9 +58,12 @@ export function SecondNavBar({ onAutorSelect}) {
                     onClick={() => handleAutorClick(autor.license)}
                 >
                     {autor.name} {autor.lastname}
+                    <figure className={styles.figure}><img src={downSVG}/></figure>
                 </button>
             ))}
         </Modal>
+
+        
     </>
   );
 }

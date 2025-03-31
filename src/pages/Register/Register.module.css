@@ -109,3 +109,7 @@ span:hover {
   text-align: center;
   
 }
+
+.anchor{
+  text-decoration: none;
+}

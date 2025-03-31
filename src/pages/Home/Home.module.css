@@ -9,7 +9,6 @@
 .sectionCards{
     display: grid;
     width: 85%;
-    overflow: hidden;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     justify-items: center;
     gap: 45px 90px;

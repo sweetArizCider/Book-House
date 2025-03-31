@@ -3,6 +3,7 @@ import useLogin from '../../hooks/login/login'
 import styles from './Login.module.css';
 import Fondo from '../../assets/img/fondo.png';
 import Logo from '../../assets/img/logo.png';
+import Loader from '../../Components/Loader/Loader';
 
 function Login() {
   const { loginUser, loading, error } = useLogin();
@@ -29,13 +30,14 @@ function Login() {
 
   return (
     <div className={styles['login-container']}>
+      {loading && <Loader />}
       <div className={styles.contenido}>
         <div className={styles['logo-container']}>
           <img src={Logo} alt="Logo de la aplicación" />
         </div>
         <form onSubmit={handleSubmit} className={styles.login}>
           <h1>Iniciar Sesión</h1>
-          <h3>¿No tienes una cuenta? <span>registrarse ahora</span></h3>
+          <h3>¿No tienes una cuenta? <a href="/register" className={styles.anchor}><span>registrarse ahora</span></a></h3>
 
           
 

@@ -4,11 +4,13 @@ import { BASE_URL } from '../../config.json';
 export function useLibros(){
     const [libros, setLibros] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
         let ignore = false;
         const getLibros = async () => {
             try{
+                setLoading(true);
                 const response = await fetch(`${BASE_URL}/libros`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -17,11 +19,13 @@ export function useLibros(){
 
                 if (!ignore) {
                     setLibros(data);
+                    setLoading(false);
                     setError(null);
                 }
             }catch(error){
                 if(!ignore){
                     setError(error || 'Error al obtener los libros');
+                    setLoading(false);
                 }
             }
         };
@@ -34,5 +38,5 @@ export function useLibros(){
         
     }, []);
 
-    return { libros, error };
+    return { libros, error, loading };
 }

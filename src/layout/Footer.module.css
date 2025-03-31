@@ -22,10 +22,14 @@
     font-weight: bold;
     background-color: transparent;
     font-size: 20px;
+    transition-duration: 400ms;
 }
 
 .footerButton:hover{
     cursor: pointer;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
 }
 
 .footerSection figure{
@@ -43,10 +47,25 @@
 
 .left{
     transform: rotate(90deg);
+    transition-duration: 400ms;
+}
+
+.left:hover{
+    cursor: pointer;
+    transform: rotate(-280deg);
+    scale: 1.3;
 }
 
 .right{
     transform: rotate(-90deg);
+    transition-duration: 400ms;
+
+}
+
+.right:hover{
+    cursor: pointer;
+    transform: rotate(280deg);
+    scale: 1.3;
 }
 
 .selected{

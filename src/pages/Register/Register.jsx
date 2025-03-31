@@ -42,10 +42,16 @@ function Register() {
 
   return (
     <div className={styles['register-container']}>
+
+
       {loading && <Loader />}
+
+
       <div className={styles.fondo}>
         <img src={Fondo} alt="Fondo de pantalla" />
       </div>
+
+
       <div className={styles.contenido}>
         <div className={styles['logo-container']}>
           <img src={Logo} alt="Logo de la aplicación" />
@@ -53,7 +59,7 @@ function Register() {
       
         <form onSubmit={handleSubmit} className={styles.registro}>
           <h1>¡Empieza ahora!</h1>
-          <h3>¿Ya tienes una cuenta? <span>Iniciar sesión</span></h3>
+          <h3>¿Ya tienes una cuenta? <a href="/login" className={styles.anchor}><span>Iniciar sesión</span></a></h3>
 
           
 
