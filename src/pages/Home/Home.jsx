@@ -14,6 +14,8 @@ import Loader from "../../Components/Loader/Loader";
 // svgs
 import multasSVG from '../../assets/svg/ticket.svg';
 import userSVG from '../../assets/svg/user.svg';
+import addSVG from '../../assets/svg/add.svg';
+
 
 // styles
 import styles from './Home.module.css';
@@ -30,7 +32,8 @@ function Home() {
 
     const hubIcons = [
       { icon: multasSVG, href: '/multas' },
-      { icon: userSVG, href: '/user' },
+      { icon: userSVG, href: '/login' },
+      { icon: addSVG, href: '/crear/libro' },
     ];
 
     const booksToDisplay = Array.isArray(autorLibros) && autorLibros.length > 0

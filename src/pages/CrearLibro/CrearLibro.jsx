@@ -46,7 +46,7 @@ function CrearLibro() {
     };
 
     const hubIcons = [
-        { icon: userSVG, href: '/user' },
+        { icon: userSVG, href: '/login' },
       ];
 
     return (

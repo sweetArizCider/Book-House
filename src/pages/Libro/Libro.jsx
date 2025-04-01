@@ -10,11 +10,11 @@ import styles from "./Libro.module.css"
 // svgs
 import ticketSVG from "../../assets/svg/ticket.svg"
 import userSVG from "../../assets/svg/user.svg"
-import trashSVG from "../../assets/svg/trash.svg"
 import libroImg from "../../assets/svg/book.svg"
 import worldImg from "../../assets/svg/world.svg"
 import rightImg from "../../assets/svg/right.svg"
 import lockImg from "../../assets/svg/lock.svg"
+import addSVG from '../../assets/svg/add.svg';
 
 //img
 import uploadImg from '../../assets/img/cargarImagen.png';
@@ -90,8 +90,8 @@ function Libro() {
 
     const hubIcons = [
     { icon: ticketSVG, href: "/multas" },
-    { icon: userSVG, href: "/user" },
-    { icon: trashSVG, href: "/home" },
+    { icon: userSVG, href: "/login" },
+    { icon: addSVG, href: "/crear/libro" },
     ]
 
     const localBook = {

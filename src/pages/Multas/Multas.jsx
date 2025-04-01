@@ -13,7 +13,7 @@ function Multas() {
   const { currentPage, paginatedItems: paginatedMultas, handlePageChange } = usePagination(multasData, 3);
   
   const hubIcons = [
-    { icon: userSVG, href: '/user' },
+    { icon: userSVG, href: '/login' },
   ];
 
   return (

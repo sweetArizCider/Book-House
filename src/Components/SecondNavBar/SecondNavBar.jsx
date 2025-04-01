@@ -1,7 +1,6 @@
 import styles from './SecondNavBar.module.css';
 import downSVG from '../../assets/svg/down.svg';
 import addSVG from '../../assets/svg/add.svg';
-import trashSVG from '../../assets/svg/trash.svg';
 import { useAutores } from '../../hooks/autores/useAutores';
 import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
@@ -31,12 +30,6 @@ export function SecondNavBar({ onAutorSelect}) {
             <section className={styles.buscadorSection}>
             </section>
             <section className={styles.iconsSection}>
-                <figure>
-                    <a href="/crear/libro"><img src={addSVG}/></a>
-                </figure>
-                <figure>
-                    <a href="/libro"><img src={trashSVG}/></a>
-                </figure>
             </section>
         </nav>
 
