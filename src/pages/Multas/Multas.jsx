@@ -44,7 +44,6 @@ function Multas() {
 
         if (result.status === "COMPLETED") {
           setMessage("Payment successful! Fines have been paid.");
-          refetchMultas(); 
         } else {
           setMessage("Payment failed or incomplete.");
         }
