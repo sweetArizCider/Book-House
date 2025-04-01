@@ -220,9 +220,8 @@ function Libro() {
                             name="sinopsis"
                         >{localBook.sinopsis}</div>
                     </div>
-                    <h4 className={styles.sectionTitle}>Genero del libro...</h4>
+                    <h4 className={styles.sectionTitle}>Contenido del libro...</h4>
                     <div className={styles.textAreaContainer}>
-                        <label className={styles.label}>Contenido</label>
                         <div
                             placeholder="Escribe el contenido de tu historia..." 
                             className={styles.textArea}

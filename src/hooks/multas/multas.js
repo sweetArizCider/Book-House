@@ -29,11 +29,14 @@ const useMultas = () => {
         setLoading(false);
       }
     };
-
     fetchMultas();
   }, []);
 
-  return { loading, error, multasData };
+  const refetch = () => {
+    fetchMultas(); 
+  };
+
+  return { loading, error, multasData, refetch };
 };
 
 export default useMultas;
