@@ -1,7 +1,8 @@
 // components
 import { NavBar } from "../../layout/NavBar"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loader from '../../Components/Loader/Loader';
+import { Modal } from "../../Components/Modal/Modal";
 
 // styles
 import styles from "./Libro.module.css"
@@ -13,6 +14,7 @@ import trashSVG from "../../assets/svg/trash.svg"
 import libroImg from "../../assets/svg/book.svg"
 import worldImg from "../../assets/svg/world.svg"
 import rightImg from "../../assets/svg/right.svg"
+import lockImg from "../../assets/svg/lock.svg"
 
 //img
 import uploadImg from '../../assets/img/cargarImagen.png';
@@ -20,26 +22,79 @@ import uploadImg from '../../assets/img/cargarImagen.png';
 // hooks
 import { useParams } from "react-router"
 import { useISBN } from '../../hooks/libros/useISBN';
+import { usePrestamos } from '../../hooks/prestamos/usePrestamos';
 
 
 function Libro() {
-  const [imageUrl, setImageUrl] = useState(uploadImg); 
-  const { isbn } = useParams();
-  const { libro, error: isbnError, loading: isbnLoading} = useISBN(isbn);
+    const { isbn } = useParams();
+    const { libro, error: isbnError, loading: isbnLoading} = useISBN(isbn);
+    const { isAvailable, loading: prestamosLoading, error, returnBook, createLoan } = usePrestamos(isbn);
+    const [imageUrl, setImageUrl] = useState(uploadImg); 
+    const [buttonClicked, setButtonClicked] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [message, setMessage] = useState(""); 
+    const [username, setUsername] = useState("");
+    const [messageColor, setMessageColor] = useState("");
 
-  const isLoading = isbnLoading;
+    const handleReturnBook = async () => {
+        setButtonClicked(true);
+        const result = await returnBook(isbn);
+        if (result) {
+            setMessage("Libro devuelto correctamente");
+            setMessageColor("green");
+        } else {
+            setMessage("Error al devolver el libro");
+            setMessageColor("red");
+        }
+    };
 
-  const handleImageError = () => {
-      setImageUrl(uploadImg); 
-  };
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    }
 
-  const hubIcons = [
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setUsername("");
+    }
+
+    const handleSubmitLoan = async (e) => {
+        e.preventDefault();
+    
+        const result = await createLoan(username, isbn);
+        if (result) {
+            setMessage("Prestamo creado con exito");
+            setMessageColor("green");
+        } else {
+            setMessage("Tienes una deuda pendiente o ese usuario no existe");
+            setMessageColor("red");
+        }
+        setIsModalOpen(false);
+        setUsername(""); 
+    };
+
+    const isLoading = isbnLoading || prestamosLoading;
+
+    const handleImageError = () => {
+        setImageUrl(uploadImg); 
+    };
+
+    useEffect(() => {
+        if (message) {
+            const timer = setTimeout(() => {
+                setMessage(""); // Clear the message after 3 seconds
+            }, 3000);
+    
+            return () => clearTimeout(timer); // Clean up the timer if the component unmounts or message changes
+        }
+    }, [message]);
+
+    const hubIcons = [
     { icon: ticketSVG, href: "/multas" },
     { icon: userSVG, href: "/user" },
     { icon: trashSVG, href: "/home" },
-  ]
+    ]
 
-  const localBook = {
+    const localBook = {
     isbn: libro ? libro.isbn : "",
     img: libro ? libro.img : "",
     title: libro ? libro.title : "",
@@ -53,7 +108,7 @@ function Libro() {
     sinopsis: libro ? libro.sinopsis : "",
     content: libro ? libro.content : "",
     author: libro ? libro.author : "",
-  }
+    }
 
   return (
     <>
@@ -184,11 +239,50 @@ function Libro() {
                         className={styles.image} 
                         onError={handleImageError}/>
                 </figure>
+                <article className={styles.buttonArticle}>
+                <button
+                    className={
+                        isAvailable ? styles.disponible : styles.noDisponible
+                    }
+                    disabled={!isAvailable}
+                    onClick={handleOpenModal}
+                >
+                    {isAvailable ? "Alquilar" : "Ocupado"}
+                </button>
+                {!isAvailable && (
+                    <button 
+                        className={styles.devolver}
+                        onClick={handleReturnBook}
+                        disabled={prestamosLoading} 
+                    >
+                        <img src={lockImg} />
+                    </button>
+                )}
+                </article>
+
+
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                    <h2 className={styles.titulo}>Usuario:</h2>
+                    <form className={styles.form} onSubmit={handleSubmitLoan}>
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        <button type="submit" disabled={prestamosLoading}>
+                            Confirmar Préstamo
+                        </button>
+                    </form>
+                </Modal>
+                
+                {message && (
+                    <p style={{ color: messageColor }}>{message}</p>
+                )}
             </section>
         </div>
     </>
   )
 }
-
 export default Libro
 
