@@ -12,7 +12,7 @@ function AppRouter() {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/libro" element={<Libro />} />
+        <Route path="/libro/:isbn" element={<Libro />} />
         <Route path="/multas" element={<Multas />} />
         <Route path="/register" element={<Register />} />
         <Route path="/crear/libro" element={<CrearLibro />} />

@@ -13,3 +13,7 @@
     justify-items: center;
     gap: 45px 90px;
 }
+
+.sectionCards a{
+    text-decoration: none;
+}

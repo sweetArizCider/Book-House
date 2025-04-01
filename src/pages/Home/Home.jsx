@@ -53,13 +53,15 @@ function Home() {
           </section>
           <section className={styles.sectionCards}>
           {booksToDisplay.map(libro => (
-              <Card 
-                key={libro.id}
-                title={libro.title}
-                author={libro.author}
-                img={libro.img}
-                pages={libro.pages}
-              />
+              <a href={`/libro/${libro.isbn}`}>
+                <Card 
+                  key={libro.id}
+                  title={libro.title}
+                  author={libro.author}
+                  img={libro.img}
+                  pages={libro.pages}
+                />
+              </a>
             ))}
           </section>
         </main>

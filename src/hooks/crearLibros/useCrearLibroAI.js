@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BASE_URL } from '../../config.json';
 
 export function useCrearLibroAI() {
     const [loading, setLoading] = useState(false); 
@@ -11,7 +12,7 @@ export function useCrearLibroAI() {
         setSuccess(false);
 
         try {
-            const response = await fetch('https://libreria-y5ka.onrender.com/libros/AI', {
+            const response = await fetch(`${BASE_URL}/libros/AI`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
