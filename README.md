@@ -1,6 +1,6 @@
 # Book House
 ## Full Stack App :). 
-### React, React Router, Express, PostgreSQL
+### React, React Router, Express, PostgreSQL, DeepSeek API, Paypal API, Gmail API
 
 ![Screenshot 2025-04-01 030822](https://github.com/user-attachments/assets/f39f4672-1f0f-4023-9f7d-54485feab254)
 ![Screenshot 2025-04-01 030938](https://github.com/user-attachments/assets/1ea0bdea-7f7f-41aa-bad0-ca17d96490fa)
